@@ -1,0 +1,29 @@
+{
+	"name": "DestinationDataset_skl",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "amphiboaproject001-WorkspaceDefaultStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "TestFile001",
+				"folderPath": "synapse/workspaces/amphiboaproject001/warehouse",
+				"fileSystem": "amphi001"
+			},
+			"columnDelimiter": ",",
+			"compressionCodec": "tar",
+			"compressionLevel": "Optimal",
+			"escapeChar": "\\",
+			"quoteChar": "\"",
+			"compression": {
+				"type": "gzip",
+				"level": "Optimal"
+			}
+		},
+		"schema": []
+	}
+}
