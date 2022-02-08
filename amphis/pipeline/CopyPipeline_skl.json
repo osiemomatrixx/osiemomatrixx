@@ -1,0 +1,114 @@
+{
+	"name": "CopyPipeline_skl",
+	"properties": {
+		"description": "Copy data tool for loading data",
+		"activities": [
+			{
+				"name": "Copy_skl",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "amphi001/synapse/workspaces/amphiboaproject001/warehouse/"
+					},
+					{
+						"name": "Destination",
+						"value": "amphi001/synapse/workspaces/amphiboaproject001/warehouse/TestFile001"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"maxConcurrentConnections": 200,
+							"recursive": true,
+							"wildcardFileName": "*",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings",
+							"compressionProperties": {
+								"type": "TarReadSettings"
+							}
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"maxConcurrentConnections": 10,
+							"copyBehavior": "MergeFiles",
+							"blockSizeInMB": 100
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "amphiboaproject001-WorkspaceDefaultStorage",
+							"type": "LinkedServiceReference"
+						},
+						"path": "amphi001/synapse/workspaces/amphiboaproject001/warehouse"
+					},
+					"parallelCopies": 1,
+					"enableSkipIncompatibleRow": true,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Info",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "amphiboaproject001-WorkspaceDefaultStorage",
+								"type": "LinkedServiceReference"
+							},
+							"path": "amphi001/synapse/workspaces/amphiboaproject001/warehouse"
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$"
+								},
+								"sink": {
+									"ordinal": 1
+								}
+							}
+						],
+						"collectionReference": "",
+						"mapComplexValuesToString": true
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_skl",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_skl",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}

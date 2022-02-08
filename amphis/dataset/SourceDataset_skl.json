@@ -1,0 +1,23 @@
+{
+	"name": "SourceDataset_skl",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "amphiboaproject001-WorkspaceDefaultStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "synapse/workspaces/amphiboaproject001/warehouse",
+				"fileSystem": "amphi001"
+			},
+			"compression": {
+				"type": "tar",
+				"level": "Optimal"
+			}
+		},
+		"schema": {}
+	}
+}
